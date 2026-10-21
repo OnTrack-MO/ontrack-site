@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OnTrack - Maîtrise d'Ouvrage</title>
+<meta name="description" content="OnTrack accompagne les opérations immobilières : conseil indépendant, assistance à maîtrise d'ouvrage (accompagnement 360°) et administration ad hoc des opérations en difficulté.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap">
+<style>
+/* Layout : bandeaux pleine largeur alternant blanc cassé et anthracite, contenu sur une grille de 1120px, filets sable et vert minéral comme seuls ornements. Charte OnTrack, un seul thème assumé. */
+:root{
+  --anthra:#282828; --anthra-2:#333331; --mineral:#A7B7A8; --grey:#8D8D8D; --sand:#D9C9A8; --cream:#F7F6F2;
+  --ink-soft:#4A4A47; --line:rgba(40,40,40,.12); --line-dark:rgba(247,246,242,.14);
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --w:1120px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--cream);color:var(--anthra);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--cream)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sand);outline-offset:3px}
+.wrap{max-width:var(--w);margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--serif);font-weight:500;text-wrap:balance;margin:0}
+h2{font-size:clamp(30px,4vw,46px);line-height:1.15}
+h3{font-size:22px;line-height:1.3}
+p{margin:0}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--grey)}
+.lead{font-size:17px;color:var(--ink-soft);max-width:62ch}
+
+/* En-tête */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(247,246,242,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:34px;height:auto;display:block}
+.brand span{font-family:var(--serif);font-size:22px;font-weight:500;letter-spacing:.01em}
+.nav{display:flex;gap:28px;align-items:center}
+.nav a{text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--ink-soft)}
+.nav a:hover{color:var(--anthra)}
+.nav .cta{color:var(--cream);background:var(--anthra);padding:10px 18px;border-radius:2px}
+.nav .cta:hover{color:var(--cream);background:#000}
+@media (max-width:860px){.nav a:not(.cta){display:none}}
+
+/* Hero */
+.hero{background:var(--anthra);color:var(--cream);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;padding-block:96px 104px;position:relative;z-index:1}
+.hero .eyebrow{color:var(--mineral)}
+.hero h1{font-size:clamp(40px,6.4vw,78px);line-height:1.04;margin-top:22px;font-weight:400}
+.hero h1 em{font-style:italic;color:var(--sand)}
+.hero .rule{width:64px;height:1.5px;background:var(--sand);margin:34px 0 26px}
+.hero p.intro{font-size:17px;color:#CFD3CC;max-width:52ch}
+.hero .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-size:14px;font-weight:500;letter-spacing:.04em;padding:14px 24px;border-radius:2px;border:1px solid transparent}
+.btn-light{background:var(--cream);color:var(--anthra)}
+.btn-light:hover{background:var(--sand)}
+.btn-ghost{border-color:var(--line-dark);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--sand)}
+.hero-logo{justify-self:end;width:100%;max-width:300px}
+.hero-logo img{width:100%;height:auto;display:block}
+.elev{position:absolute;right:-40px;bottom:-2px;width:560px;max-width:70%;opacity:.16;z-index:0}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-block:64px 72px}.hero-logo{display:none}}
+
+/* Sections */
+section.band{padding-block:104px}
+section.band + section.band{border-top:1px solid var(--line)}
+.head{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:56px}
+.head h2{margin-top:12px}
+@media (max-width:860px){section.band{padding-block:72px}.head{grid-template-columns:1fr;gap:20px;margin-bottom:40px}}
+
+/* Contexte */
+.context{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--anthra)}
+.context div{padding:28px 28px 0 0;min-width:0}
+.context div + div{padding-left:28px;border-left:1px solid var(--line)}
+.context h3{font-size:20px;margin-bottom:10px}
+.context p{font-size:15px;color:var(--ink-soft)}
+@media (max-width:760px){.context{grid-template-columns:1fr}.context div,.context div + div{padding:24px 0;border-left:0;border-bottom:1px solid var(--line)}}
+
+/* Compétences */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.skill{background:var(--cream);padding:32px 30px;min-width:0}
+.skill .k{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+.skill h3{margin:10px 0 10px}
+.skill p{font-size:15px;color:var(--ink-soft)}
+.skill .dot{display:block;width:8px;height:8px;border-radius:50%;background:var(--mineral);margin-bottom:22px}
+@media (max-width:860px){.skills{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.skills{grid-template-columns:1fr}}
+
+/* Offres */
+.offers-band{background:#EFEDE6}
+.scale{display:flex;align-items:center;gap:14px;margin-bottom:28px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--grey)}
+.scale i{flex:1;height:1px;background:linear-gradient(90deg,var(--mineral),var(--sand))}
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.offer{background:var(--cream);border:1px solid var(--line);padding:36px 32px 34px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.offer.main{background:var(--anthra);color:var(--cream);border-color:var(--anthra)}
+.offer .tag{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+.offer.main .tag{color:var(--mineral)}
+.offer h3{font-size:26px}
+.offer .when{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--ink-soft);line-height:1.5}
+.offer.main .when{color:var(--sand)}
+.offer ul{list-style:none;margin:6px 0 0;padding:16px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.offer.main ul{border-color:var(--line-dark)}
+.offer li{font-size:14.5px;display:flex;gap:12px;align-items:baseline}
+.offer li::before{content:"";flex:none;width:12px;height:1px;background:var(--sand);transform:translateY(-4px)}
+@media (max-width:900px){.offers{grid-template-columns:1fr}}
+
+/* Méthode 360 */
+.method{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.phase{border:1px solid var(--line);padding:30px 32px;background:var(--cream);min-width:0}
+.phase .tag{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+.phase h3{margin:8px 0 10px}
+.phase p{font-size:15px;color:var(--ink-soft)}
+@media (max-width:760px){.method{grid-template-columns:1fr}}
+
+/* Pourquoi */
+.dark{background:var(--anthra);color:var(--cream)}
+.dark .eyebrow{color:var(--mineral)}
+.dark .lead{color:#CFD3CC}
+.figures{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:72px}
+.fig{border-top:1px solid var(--sand);padding-top:22px}
+.fig b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(46px,6vw,68px);line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.fig span{display:block;margin-top:12px;font-size:14px;color:#CFD3CC}
+.reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 56px}
+.reason{display:grid;grid-template-columns:auto 1fr;gap:18px;min-width:0}
+.reason .sq{width:10px;height:10px;background:var(--mineral);margin-top:12px}
+.reason h3{color:var(--cream);margin-bottom:8px}
+.reason p{color:#CFD3CC;font-size:15px}
+@media (max-width:760px){.figures{grid-template-columns:1fr;margin-bottom:48px}.reasons{grid-template-columns:1fr}}
+
+/* Équipe */
+.team{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.person{border:1px solid var(--line);padding:36px 34px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;min-width:0}
+.mono{width:64px;height:64px;border-radius:50%;background:var(--mineral);display:grid;place-items:center;font-family:var(--serif);font-size:22px;color:var(--anthra)}
+.person h3{font-size:26px}
+.person .role{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin:6px 0 14px}
+.person p{font-size:15px;color:var(--ink-soft)}
+.todo{display:inline-block;margin-top:12px;font-size:12px;padding:4px 10px;background:rgba(217,201,168,.45);color:var(--anthra);border-radius:2px}
+@media (max-width:860px){.team{grid-template-columns:1fr}}
+@media (max-width:460px){.person{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contact h2{font-size:clamp(36px,5vw,60px);font-weight:400}
+.contact h2 em{font-style:italic}
+.cards{display:flex;flex-direction:column;gap:12px}
+.card{display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid var(--line);padding:18px 22px;background:#fff;min-width:0}
+.card .who{min-width:0}
+.card .who small{display:block;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.card .who a{display:block;font-size:16px;font-weight:500;text-decoration:none;overflow-wrap:anywhere;user-select:all}
+.card .who a:hover{text-decoration:underline;text-decoration-color:var(--sand);text-underline-offset:4px}
+.copy{flex:none;font:500 12px var(--sans);letter-spacing:.06em;color:var(--anthra);background:transparent;border:1px solid var(--line);padding:8px 12px;border-radius:2px;cursor:pointer}
+.copy:hover{border-color:var(--anthra)}
+@media (max-width:860px){.contact{grid-template-columns:1fr;gap:36px}}
+
+/* Pied de page */
+footer{background:var(--anthra);color:#CFD3CC}
+footer .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:center;padding-block:56px calc(56px + env(safe-area-inset-bottom,0px))}
+footer img{width:120px;height:auto;display:block}
+footer .tagline{font-size:13px;letter-spacing:.04em}
+footer .legal{display:flex;flex-direction:column;gap:6px;text-align:right;font-size:13px}
+footer .legal a{text-decoration:none;border-bottom:1px solid var(--line-dark)}
+footer .legal a:hover{border-color:var(--sand)}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr;gap:24px}footer .legal{text-align:left}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#accueil" aria-label="OnTrack, retour en haut de page">
+      <img src="mark-ink.svg" alt="">
+      <span>OnTrack</span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#metier">Notre métier</a>
+      <a href="#accompagnement">Accompagnement</a>
+      <a href="#pourquoi">Pourquoi OnTrack</a>
+      <a href="#equipe">Équipe</a>
+      <a class="cta" href="#contact">Nous contacter</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="accueil">
+    <svg class="elev" viewBox="0 0 560 420" aria-hidden="true" fill="none" stroke="#F7F6F2" stroke-width="1">
+      <path d="M40 420V120h200v300M240 420V40h280v380M0 420h560"/>
+      <path d="M40 160h200M40 200h200M40 240h200M40 280h200M40 320h200M40 360h200M100 120v300M170 120v300"/>
+      <path d="M240 80h280M240 120h280M240 160h280M240 200h280M240 240h280M240 280h280M240 320h280M240 360h280M310 40v380M380 40v380M450 40v380"/>
+      <path d="M350 420v-46h60v46"/>
+    </svg>
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Maîtrise d'ouvrage · Conseil &amp; administration de projet</div>
+        <h1>Sécuriser vos opérations <em>immobilières</em>, du conseil à la livraison.</h1>
+        <div class="rule"></div>
+        <p class="intro">OnTrack accompagne promoteurs, investisseurs, financeurs et garants sur leurs opérations de construction. Un regard indépendant, une méthode de pilotage éprouvée, et la capacité de reprendre la main quand une opération dérape.</p>
+        <div class="actions">
+          <a class="btn btn-light" href="#contact">Parlons de votre opération</a>
+          <a class="btn btn-ghost" href="#accompagnement">Nos accompagnements</a>
+        </div>
+      </div>
+      <div class="hero-logo"><img src="logo-light.svg" alt="OnTrack, Maîtrise d'ouvrage"></div>
+    </div>
+  </section>
+
+  <section class="band" id="contexte">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="eyebrow">Contexte</div>
+          <h2>Un marché sous tension, des opérations plus fragiles.</h2>
+        </div>
+        <p class="lead">Depuis 2021, le logement neuf a connu un net recul des ventes. Hausse des coûts, financements plus exigeants et commercialisation ralentie : chaque opération demande aujourd'hui un pilotage plus serré.</p>
+      </div>
+      <div class="context">
+        <div><h3>Des équilibres plus fins</h3><p>Coûts de construction, taux et prix de sortie : les marges de manœuvre se sont réduites et la moindre dérive se paie.</p></div>
+        <div><h3>Des acteurs plus exposés</h3><p>Promoteurs, financeurs et garants portent un risque accru, et ont besoin d'une vision claire de l'état réel de leurs opérations.</p></div>
+        <div><h3>Des décisions à anticiper</h3><p>Repérer tôt les signaux faibles permet d'agir quand les options sont encore ouvertes, plutôt que de subir.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="metier">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="eyebrow">Notre métier</div>
+          <h2>Un seul interlocuteur, six compétences.</h2>
+        </div>
+        <p class="lead">Une opération immobilière mobilise des expertises qui se parlent rarement. OnTrack les réunit pour donner au maître d'ouvrage, ou à celui qui le garantit, une lecture complète de son projet.</p>
+      </div>
+      <div class="skills">
+        <div class="skill"><span class="dot"></span><div class="k">Amont</div><h3>Programmation</h3><p>Définition du programme, adéquation au marché et aux attentes des acquéreurs.</p></div>
+        <div class="skill"><span class="dot"></span><div class="k">Amont</div><h3>Montage</h3><p>Structuration de l'opération, bilan prévisionnel, foncier et autorisations.</p></div>
+        <div class="skill"><span class="dot"></span><div class="k">Cadre</div><h3>Juridique</h3><p>Contrats, permis, assurances, relations avec les intervenants et les acquéreurs.</p></div>
+        <div class="skill"><span class="dot"></span><div class="k">Chantier</div><h3>Technique</h3><p>Suivi des études et des travaux, planning, qualité et coordination des entreprises.</p></div>
+        <div class="skill"><span class="dot"></span><div class="k">Pilotage</div><h3>Financier</h3><p>Suivi budgétaire, flux de trésorerie, appels de fonds et reporting chiffré.</p></div>
+        <div class="skill"><span class="dot"></span><div class="k">Sortie</div><h3>Commercial</h3><p>Rythme de commercialisation, grille de prix et scénarios de sortie.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band offers-band" id="accompagnement">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="eyebrow">Nos accompagnements</div>
+          <h2>Un accompagnement gradué, du conseil à l'administration ad hoc.</h2>
+        </div>
+        <p class="lead">Nous intervenons au moment où vous en avez besoin, avec le niveau d'engagement que la situation demande.</p>
+      </div>
+      <div class="scale"><span>Ponctuel</span><i></i><span>Intégré</span></div>
+      <div class="offers">
+        <article class="offer">
+          <div class="tag">Conseil</div>
+          <h3>Conseil indépendant</h3>
+          <p class="when">Vous avez une question précise ou une décision à prendre.</p>
+          <ul>
+            <li>Analyse de faisabilité d'une opération</li>
+            <li>Revue de bilan et de montage</li>
+            <li>Avis indépendant avant un engagement</li>
+          </ul>
+        </article>
+        <article class="offer main">
+          <div class="tag">Assistance à maîtrise d'ouvrage</div>
+          <h3>Accompagnement à 360°</h3>
+          <p class="when">Vous voulez une opération pilotée et sous contrôle, de bout en bout.</p>
+          <ul>
+            <li>Pilotage, reporting et procédure d'alerte</li>
+            <li>Suivi technique et planning</li>
+            <li>Contrôle des flux financiers</li>
+            <li>Administratif, juridique et commercial</li>
+          </ul>
+        </article>
+        <article class="offer">
+          <div class="tag">Accompagnement en difficulté</div>
+          <h3>Administration ad hoc</h3>
+          <p class="when">L'opération est bloquée et il faut reprendre la main.</p>
+          <ul>
+            <li>Diagnostic de la situation réelle</li>
+            <li>Reprise du pilotage de l'opération</li>
+            <li>Construction de scénarios de sortie</li>
+          </ul>
+        </article>
+      </div>
+      <div class="method">
+        <div class="phase">
+          <div class="tag">Accompagnement 360° · Phase 1</div>
+          <h3>Diagnostic</h3>
+          <p>Un état des lieux complet de l'opération, remis sous forme de rapport quatre semaines après réception des pièces.</p>
+        </div>
+        <div class="phase">
+          <div class="tag">Accompagnement 360° · Phase 2</div>
+          <h3>Suivi mensuel</h3>
+          <p>Un pilotage continu jusqu'à la livraison, avec un reporting régulier et une alerte chiffrée dès qu'un écart apparaît.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark" id="pourquoi">
+    <div class="wrap">
+      <div class="figures">
+        <div class="fig"><b>+40</b><span>ans d'expérience dans l'immobilier</span></div>
+        <div class="fig"><b>2</b><span>associés fondateurs, vos interlocuteurs directs</span></div>
+        <div class="fig"><b>6</b><span>compétences réunies autour de votre opération</span></div>
+      </div>
+      <div class="head">
+        <div>
+          <div class="eyebrow">Pourquoi OnTrack</div>
+          <h2>Ce qui distingue notre accompagnement.</h2>
+        </div>
+        <p class="lead">Nos parcours nous ont placés aux côtés des maîtres d'ouvrage. Nous savons ce qu'ils attendent, et ce qu'un financeur ou un garant a besoin de savoir.</p>
+      </div>
+      <div class="reasons">
+        <div class="reason"><span class="sq"></span><div><h3>L'indépendance</h3><p>Nous déclarons tout lien d'intérêt avant d'intervenir. Notre avis n'est lié ni à un entrepreneur, ni à un vendeur.</p></div></div>
+        <div class="reason"><span class="sq"></span><div><h3>La vision d'ensemble</h3><p>Technique, juridique, financier et commercial sont lus ensemble, parce qu'un problème sur l'un se répercute toujours sur les autres.</p></div></div>
+        <div class="reason"><span class="sq"></span><div><h3>Des alertes chiffrées</h3><p>Un reporting régulier et une procédure d'alerte écrite : vous savez où en est l'opération, et ce que coûte chaque écart.</p></div></div>
+        <div class="reason"><span class="sq"></span><div><h3>Un engagement clair</h3><p>Des missions au forfait, un périmètre écrit et une convention lisible. Vous savez ce que vous achetez.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="equipe">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="eyebrow">Qui sommes-nous</div>
+          <h2>Deux associés, une même exigence.</h2>
+        </div>
+        <p class="lead">OnTrack est née de la rencontre de deux parcours complémentaires dans l'immobilier, et de la conviction qu'une opération bien pilotée est une opération qui aboutit.</p>
+      </div>
+      <div class="team">
+        <article class="person">
+          <div class="mono" aria-hidden="true">BM</div>
+          <div>
+            <h3>Bertrand Malbet</h3>
+            <div class="role">Associé fondateur</div>
+            <p>Biographie à reprendre de la version validée du support commercial.</p>
+            <span class="todo">À compléter</span>
+          </div>
+        </article>
+        <article class="person">
+          <div class="mono" aria-hidden="true">HG</div>
+          <div>
+            <h3>Hugo Garcia</h3>
+            <div class="role">Associé fondateur</div>
+            <p>Biographie à reprendre de la version validée du support commercial.</p>
+            <span class="todo">À compléter</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="contact">
+    <div class="wrap contact">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2 style="margin-top:14px">Parlons de votre <em>opération</em>.</h2>
+        <p class="lead" style="margin-top:20px">Un premier échange permet de comprendre votre situation et de vous dire, simplement, si et comment nous pouvons vous aider.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="who"><small>Contact général</small><a href="mailto:contact@ontrack-conseil.com">contact@ontrack-conseil.com</a></div><button class="copy" type="button" data-copy="contact@ontrack-conseil.com">Copier</button></div>
+        <div class="card"><div class="who"><small>Bertrand Malbet</small><a href="mailto:b.malbet@ontrack-conseil.com">b.malbet@ontrack-conseil.com</a></div><button class="copy" type="button" data-copy="b.malbet@ontrack-conseil.com">Copier</button></div>
+        <div class="card"><div class="who"><small>Hugo Garcia</small><a href="mailto:h.garcia@ontrack-conseil.com">h.garcia@ontrack-conseil.com</a></div><button class="copy" type="button" data-copy="h.garcia@ontrack-conseil.com">Copier</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="logo-light.svg" alt="OnTrack, Maîtrise d'ouvrage">
+    <div class="tagline">Conseil &amp; administration de projet en immobilier</div>
+    <div class="legal">
+      <span>© 2026 OnTrack - Maîtrise d'Ouvrage</span>
+      <a href="mentions-legales.html">Mentions légales</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var v=b.getAttribute('data-copy');
+    function done(t){b.textContent=t;setTimeout(function(){b.textContent='Copier'},1800)}
+    try{
+      navigator.clipboard.writeText(v).then(function(){done('Copié')},function(){sel(b);done('Sélectionné')});
+    }catch(e){sel(b);done('Sélectionné')}
+  });
+});
+function sel(b){var a=b.parentNode.querySelector('a');var r=document.createRange();r.selectNodeContents(a);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}
+</script>
+
+</body>
+</html>
